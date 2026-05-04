@@ -1,25 +1,49 @@
 # Agent State DB
 
-SQLite+WAL shared state for autonomous AI agents. Solves concurrency across multiple
-cron jobs by providing agent identity, run journals, versioned key-value state,
-advisory locks, and cross-agent coordination.
+SQLite+WAL shared state service for autonomous AI agents. Gives every agent an
+identity, a journal, versioned key-value state, advisory locks, and cross-agent
+coordination — so multiple cron jobs can share resources without stepping on each
+other.
 
 ---
 
-### 🧸 If you're 5:
+## Summary
 
-Imagine 19 robots all trying to use the same whiteboard at the same time. Without rules,
-they'd draw over each other's work, erase things by accident, and nobody would know
-who did what.
+When you run multiple AI agents at the same time, they all need to read and write
+the same files, track what they've done, and avoid duplicating work. Without shared
+state, they collide — overwriting each other's output, re-processing finished tasks,
+or working on the same thing twice.
 
-Agent State DB gives each robot:
-- 🪪 **A name tag** — "I'm hourly-review, job #eafaef2d893b"
-- 📝 **A notebook** — "I started working at 2pm and finished at 2:05pm"
-- 🔒 **A lock** — "I'm writing on the whiteboard now, wait your turn!"
-- 🗣️ **A walkie-talkie** — "Hey everyone, I'm working on catalog.json right now"
-- 💾 **A drawer** — "Last time I checked, I was on web part #42"
+Agent State DB is a single source of truth that all agents share. Each agent
+registers once, then logs every run (when it started, what it did, whether it
+succeeded). Agents can set locks on shared resources and announce what they're
+currently working on, so others can check before starting conflicting work.
 
-Now all 19 robots can share the whiteboard without chaos.
+Think of it as the noticeboard in a shared workshop — everyone pins their name,
+their current task, and any "do not touch" signs on shared tools.
+
+---
+
+## Who it's for
+
+- Anyone running **multiple scheduled AI agents** (cron jobs, background workers)
+  that read or write the same files
+- **DevOps workflows** where agent runs need to be auditable — what ran when,
+  did it succeed
+- **Multi-agent systems** where agents need to coordinate without a human in
+  the loop
+- **Self-improving agents** that benefit from knowing what they did last time
+
+## Who it's NOT for
+
+- **Single-agent setups** — if you only run one agent, you don't need
+  coordination or locking
+- **Stateless workflows** — if each run is fully independent with no shared
+  files or state to track
+- **Interactive-only use** — this is built for autonomous agents, not
+  human-driven REPL sessions
+- **Distributed systems** — it's local SQLite, not a network database.
+  One machine, one DB
 
 ---
 
