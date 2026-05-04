@@ -4,6 +4,25 @@ SQLite+WAL shared state for autonomous AI agents. Solves concurrency across mult
 cron jobs by providing agent identity, run journals, versioned key-value state,
 advisory locks, and cross-agent coordination.
 
+---
+
+### 🧸 If you're 5:
+
+Imagine 19 robots all trying to use the same whiteboard at the same time. Without rules,
+they'd draw over each other's work, erase things by accident, and nobody would know
+who did what.
+
+Agent State DB gives each robot:
+- 🪪 **A name tag** — "I'm hourly-review, job #eafaef2d893b"
+- 📝 **A notebook** — "I started working at 2pm and finished at 2:05pm"
+- 🔒 **A lock** — "I'm writing on the whiteboard now, wait your turn!"
+- 🗣️ **A walkie-talkie** — "Hey everyone, I'm working on catalog.json right now"
+- 💾 **A drawer** — "Last time I checked, I was on web part #42"
+
+Now all 19 robots can share the whiteboard without chaos.
+
+---
+
 ## Install
 
 ```bash
