@@ -83,7 +83,8 @@ db.health_check()  # returns dict with counts, WAL status, size
 
 ## Deployment
 
-- Module lives at `~/.hermes/scripts/agent_state_db.py`
+- Python package installable via `pip install -e .` (or `pip install agent-state-db` from PyPI)
 - DB lives at `~/.hermes/state/agent_state.db`
 - Zero dependencies beyond Python stdlib (sqlite3, json, uuid, datetime)
-- Agents import and use directly — no daemon, no socket, no server
+- Agents import and use directly: `from agent_state_db.core import AgentStateDB`
+- Cron integration: `scripts/cron_pre_flight.py` + `scripts/cron_post_flight.py` for auto-registration and run tracking

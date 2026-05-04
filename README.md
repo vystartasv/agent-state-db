@@ -89,6 +89,24 @@ agent-state coord working-on <agent-id> <resource>
 agent-state stats
 ```
 
+## Cron Integration
+
+Cron jobs can use the pre-flight/post-flight pattern to auto-register and track runs:
+
+```bash
+# Pre-flight — registers agent, starts run, exports RUN_ID
+eval $(python3.11 scripts/cron_pre_flight.py "My Cron Job" "cron-job-id-abc")
+
+# ... do the actual work ...
+
+# Post-flight — records outcome
+python3.11 scripts/cron_post_flight.py "$AGENT_STATE_RUN_ID" completed "What was done"
+```
+
+This is the integration pattern used by Cron Guard: every cron job in the fleet calls
+pre-flight before its model runs and post-flight after, building a searchable audit
+trail of every autonomous agent run.
+
 ## License
 
 MIT
