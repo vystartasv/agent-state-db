@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+.venv/
+*.db
+*.sqlite
+*.sqlite3
+.env
+.master_key
+credentials.*
