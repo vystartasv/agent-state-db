@@ -1,6 +1,6 @@
 # My 19 AI Agents Kept Breaking Each Other — The 4 Tools That Fixed It
 
-*By Vilius Vystartas | May 2026*
+*By Vilius Vystartas | May 2026 | [Published on dev.to](https://dev.to/vystartasv/my-19-ai-agents-kept-breaking-each-other-the-4-tools-that-fixed-it-3559)*
 
 I run 19 AI agents on my machine. They wake up throughout the day to review code, publish content, check server health, research medical literature, and self-improve. Some run hourly. Some fire at 2am.
 
